@@ -1,0 +1,31 @@
+{
+  "name": "bus_ways_server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@adminjs/express": "^6.1.1",
+    "@adminjs/mongoose": "^4.1.0",
+    "@adminjs/themes": "^1.0.1",
+    "adminjs": "^7.8.16",
+    "body-parser": "^2.2.0",
+    "connect-mongodb-session": "^5.0.0",
+    "cros": "^1.1.0",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.18.1",
+    "google-auth-library": "^10.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.2",
+    "nodemon": "^3.1.10",
+    "uuid": "^11.1.0"
+  }
+}
