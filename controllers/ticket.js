@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import Bus from "../models/bus.js";
 import User from "../models/user.js";
-import Ticket from "../models/ticket";
+import Ticket from "../models/ticket.js";
 
 const getUserTicket = async (req, res) => {
   try {
