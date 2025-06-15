@@ -7,7 +7,7 @@ import { PORT } from "./config/config.js";
 
 import userRoutes from "./routes/user.js";
 import busRoutes from "./routes/bus.js";
-import ticketRoutes from './routes/'
+import ticketRoutes from './routes/ticket.js'
 
 dontenv.config();
 const app = express();
@@ -23,8 +23,6 @@ app.use(express.json());
 app.use("/user", userRoutes);
 app.use("/bus", busRoutes);
 app.use("/ticket", ticketRoutes);
-
-
 
 const start = async () => {
   try {
