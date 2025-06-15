@@ -7,8 +7,7 @@ import { PORT } from "./config/config.js";
 
 import userRoutes from "./routes/user.js";
 import busRoutes from "./routes/bus.js";
-import ticketRoutes from "./routes/ticket.js";
-import { buildAdminJS } from "./config/setup.js";
+import ticketRoutes from './routes/'
 
 dontenv.config();
 const app = express();
@@ -25,16 +24,17 @@ app.use("/user", userRoutes);
 app.use("/bus", busRoutes);
 app.use("/ticket", ticketRoutes);
 
+
+
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL);
-    await buildAdminJS(app)
     app.listen({ port: PORT, host: "0.0.0.0" }, (err, addr) => {
       if (err) {
         console.log("Failed to listen server", err);
       } else {
         console.log(
-          `server started successfully started: http://localhost:${PORT}/admin`
+          `server started successfully started: https//:localhost:${PORT}`
         );
       }
     });
