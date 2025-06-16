@@ -19,7 +19,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
+app.get("/", (req, res) => {
+  res.send("Welcome to Bus Ways API");
+}
+);
 app.use("/user", userRoutes);
 app.use("/bus", busRoutes);
 app.use("/ticket", ticketRoutes);
