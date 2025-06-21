@@ -23,6 +23,7 @@ const generateToken = (user) => {
 const loginOrSignupUser = async (req, res) => {
   try {
     const { idToken } = req.body;
+
     const ticket = await client.verifyIdToken({
       idToken: idToken,
       audience: process.env.GOOGLE_CLIENT_ID,
