@@ -4,10 +4,12 @@ import cors from "cors";
 
 import connectDB from "./config/connect.js";
 import { PORT } from "./config/config.js";
+import { buildAdminJS } from "./config/setup.js";
 
 import userRoutes from "./routes/user.js";
 import busRoutes from "./routes/bus.js";
 import ticketRoutes from './routes/ticket.js';
+import Bus from "./models/bus.js";
 
 dotenv.config();
 
@@ -29,10 +31,21 @@ app.use("/user", userRoutes);
 app.use("/bus", busRoutes);
 app.use("/ticket", ticketRoutes);
 
+// const deleteCompletedBuses = async () => {
+//   try {
+//     const now = new Date();
+//     const result = await Bus.deleteMany({ arrivalTime: { $lt: now } });
+//     console.log(`${result.deletedCount} completed buses deleted.`);
+//   } catch (error) {
+//     console.error('Error deleting completed buses:', error);
+//   }
+// };
+
+
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL);
-
+    // await deleteCompletedBuses();
     // ✅ Initialize AdminJS
     // await buildAdminJS(app);
 

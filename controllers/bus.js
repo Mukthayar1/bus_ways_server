@@ -3,16 +3,17 @@ import Bus from "../models/bus.js";
 const getBusDetail = async (req, res) => {
   try {
     const { busId } = req.params;
-    if (!busId) {
-      return req.status(400).json({ error: "bus id is required" });
+    const bus = await Bus.findOne({ busId });
+    if (!bus) {
+      return res.status(404).json({ error: 'Bus not found' });
     }
-    const bus = await Bus.findById({ busId });
-    res.status(200).json({ success: true, bus });
+    res.status(200).json({ data: bus });
   } catch (error) {
-    console.log("getBusDetail", error);
-    return req.status(500).json({ error: "Internal server error" });
+    console.error('getBusDetail error:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
 
 const searchBus = async (req, res) => {
   try {
@@ -31,7 +32,6 @@ const searchBus = async (req, res) => {
       to,
       departureTime: { $gte: startOfDay, $lte: endOfDay },
     });
-
     res.status(200).json({ success: true, buses });
   } catch (error) {
     console.log("searchBus", error);

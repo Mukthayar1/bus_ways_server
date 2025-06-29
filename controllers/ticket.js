@@ -16,7 +16,6 @@ const getUserTicket = async (req, res) => {
         "busId from busType company departureTime arrivalTime price"
       )
       .sort({ bookedAt: -1 });
-
     res.status(200).json({
       success: true,
       ticket,
@@ -29,21 +28,24 @@ const getUserTicket = async (req, res) => {
 
 const bookTicket = async (req, res) => {
   try {
+    console.log(
+      'req?.body', req?.body
+    );
     const { busId, date, seatNumbers } = req?.body;
     const userId = req?.userId;
 
     if (!busId || !date || !seatNumbers || seatNumbers?.length == 0) {
-      return req.status(404).json({ error: "All fields are required" });
+      return res.status(404).json({ error: "All fields are required" });
     }
 
     const bus = await Bus.findOne({ busId });
     if (!bus) {
-      return req.status(404).json({ error: "Bus not find" });
+      return res.status(404).json({ error: "Bus not find" });
     }
 
-    const user = await User.findOne({ userId });
+    const user = await User.findById(userId); // ✅ CORRECT
     if (!user) {
-      return req.status(404).json({ error: "User not find" });
+      return res.status(404).json({ error: "User not find" });
     }
 
     const unavailableSeats = seatNumbers?.filter((seatNum) =>
@@ -53,7 +55,7 @@ const bookTicket = async (req, res) => {
     );
 
     if (unavailableSeats?.length > 0) {
-      return req.status(404).json({ error: "These seats are already booked" });
+      return res.status(404).json({ error: "These seats are already booked" });
     }
 
     const totalFare = bus.price * seatNumbers?.length;
@@ -75,14 +77,14 @@ const bookTicket = async (req, res) => {
       });
     });
     await bus.save();
-    req.status(201).json({
+    res.status(201).json({
       success: true,
       message: "Ticket created successfully",
       ticket: newTicket,
     });
   } catch (error) {
     console.log("getUserTicket", error);
-    req.status(500).json({ error: "Failed to book User confirm" });
+    res.status(500).json({ error: "Failed to book User confirm" });
   }
 };
 
